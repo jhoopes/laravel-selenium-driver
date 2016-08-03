@@ -1,0 +1,23 @@
+{
+    "name": "jhoopes/laravel-selenium-driver",
+    "description": "A package wrapper that works with selenium to test laravel applications in the browser, inspired from laracasts integrated package",
+    "require": {
+        "phpunit/phpunit-selenium": "> 1.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "John Hoopes",
+            "email": "john.z.hoopes@gmail.com"
+        },
+        {
+	        "name": "JeffreyWay",
+            "email": "jeffrey@laracasts.com"
+        }
+    ],
+    "autoload": {
+	    "psr-4": {
+		    "LaravelSeleniumDriver\\": "src/"
+	    }
+    }
+}
