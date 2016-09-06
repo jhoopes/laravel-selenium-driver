@@ -83,9 +83,7 @@ trait InteractsWithPage {
     {
         try {
             $element = $this->findElement($textOrId, "//a[contains(text(), '{$textOrId}')]");
-        }catch(\Exception $e ) {
-            $element = $this->findElement($textOrId);
-        }
+        }catch(\Exception $e ) {}
 
         try {
             $element->click();

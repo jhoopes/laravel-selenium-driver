@@ -2,6 +2,7 @@
 
 namespace LaravelSeleniumDriver\Traits;
 
+use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 /**
  * Many functions contained in this class are from the laravel framework's Application trait
  * Class WorksWithLaravel
@@ -91,17 +92,6 @@ trait WorksWithLaravel {
     }
 
     /**
-     * Seed a given database connection.
-     *
-     * @param  string  $class
-     * @return void
-     */
-    public function seed($class = 'DatabaseSeeder')
-    {
-        $this->artisan('db:seed', ['--class' => $class]);
-    }
-
-    /**
      * Call artisan command and return code.
      *
      * @param  string  $command
@@ -115,6 +105,17 @@ trait WorksWithLaravel {
         }
 
         return $this->code = $this->app['Illuminate\Contracts\Console\Kernel']->call($command, $parameters);
+    }
+
+    /**
+     * Set a user in laravel
+     *
+     * @param UserContract $user
+     * @param null $driver
+     */
+    public function be(UserContract $user, $driver = null)
+    {
+        $this->app['auth']->driver($driver)->setUser($user);
     }
 
 }

@@ -44,5 +44,17 @@ trait WaitForElements {
         return $this;
     }
 
+    protected function waitForElementWithId($id, $timeout = 2000)
+    {
+        try{
+            $this->waitForElement('Id', $id, $timeout);
+        }catch (\Exception $e) {
+            throw new \CannotFindElement("Can't find an element with an ID of "
+                . $id. " within the time period of " . $timeout . " miliseconds");
+        }
+
+        return $this;
+    }
+
 
 }

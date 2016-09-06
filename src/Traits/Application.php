@@ -2,7 +2,8 @@
 
 namespace LaravelSeleniumDriver\Traits;
 
-trait Application {
+trait Application
+{
 
     protected $app;
 
@@ -13,8 +14,8 @@ trait Application {
      */
     public function setUpLaravel()
     {
-        if (! $this->app) {
-            $this->createApplication();
+        if (!$this->app) {
+            $this->app = $this->createApplication();
         }
     }
 
@@ -39,11 +40,30 @@ trait Application {
      */
     protected function createApplication()
     {
-        $app = require __DIR__.'/../../../../../bootstrap/app.php';
+        $app = require __DIR__ . '/../../../../../bootstrap/app.php';
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 
         return $app;
+    }
+
+    /**
+     * Migrate the database
+     */
+    protected function migrate()
+    {
+        $this->artisan('migrate:refresh');
+    }
+
+    /**
+     * Seed a given database connection.
+     *
+     * @param  string  $class
+     * @return void
+     */
+    public function seed($class = 'DatabaseSeeder')
+    {
+        $this->artisan('db:seed', ['--class' => $class]);
     }
 
 
