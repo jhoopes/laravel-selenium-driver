@@ -3,6 +3,8 @@
 namespace LaravelSeleniumDriver\Traits;
 
 
+use LaravelSeleniumDriver\Exceptions\CannotFindElement;
+
 trait WaitForElements {
 
 
@@ -37,7 +39,7 @@ trait WaitForElements {
         try{
             $this->waitForElement('ClassName', $class, $timeout);
         }catch (\Exception $e) {
-            throw new \CannotFindElement("Can't find an element with the class name of "
+            throw new CannotFindElement("Can't find an element with the class name of "
                 . $class. " within the time period of " . $timeout . " miliseconds");
         }
 
@@ -49,8 +51,20 @@ trait WaitForElements {
         try{
             $this->waitForElement('Id', $id, $timeout);
         }catch (\Exception $e) {
-            throw new \CannotFindElement("Can't find an element with an ID of "
+            throw new CannotFindElement("Can't find an element with an ID of "
                 . $id. " within the time period of " . $timeout . " miliseconds");
+        }
+
+        return $this;
+    }
+
+    protected function waitForElementWithXPath($xpath, $timeout = 2000)
+    {
+        try{
+            $this->waitForElement('XPath', $xpath, $timeout);
+        }catch (\Exception $e) {
+            throw new CannotFindElement("Can't find an element with an XPath of "
+                . $xpath. " within the time period of " . $timeout . " miliseconds");
         }
 
         return $this;

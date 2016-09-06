@@ -85,6 +85,12 @@ class SeleniumTestCase extends \PHPUnit_Extensions_Selenium2TestCase
     }
 
 
+    /**
+     * Sleep for a time in seconds
+     *
+     * @param int $seconds
+     * @return $this
+     */
     protected function wait($seconds = 1)
     {
         sleep($seconds);
