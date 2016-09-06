@@ -72,21 +72,25 @@ trait InteractsWithPage {
         return $this;
     }
 
-    protected function click($text)
+    /**
+     * Click an element based on text passed in, or pass an Id or Name to find the element by
+     *
+     * @param $textOrId
+     * @return $this
+     * @throws CannotClickElement Throws when the element cannot be clicked
+     */
+    protected function click($textOrId)
     {
         try {
-            //$element = $this->byLinkText($text);
-            $element = $this->byXPath("//a[contains(text(), '{$text}')]");
-        }catch(\Exception$e ) {
-
-        }finally{
-
+            $element = $this->findElement($textOrId, "//a[contains(text(), '{$textOrId}')]");
+        }catch(\Exception $e ) {
+            $element = $this->findElement($textOrId);
         }
 
         try {
             $element->click();
         }catch (\Exception $e) {
-            throw new CannotClickElement('Cannot click the element with the text: ' . $text);
+            throw new CannotClickElement('Cannot click the element with the text: ' . $textOrId);
         }
 
         return $this;
