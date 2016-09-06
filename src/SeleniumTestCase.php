@@ -2,43 +2,32 @@
 
 namespace LaravelSeleniumDriver;
 
+use LaravelSeleniumDriver\Traits\Application;
+use LaravelSeleniumDriver\Traits\GetsConfiguration;
+use LaravelSeleniumDriver\Traits\InteractsWithPage;
+use LaravelSeleniumDriver\Traits\WaitForElements;
+use LaravelSeleniumDriver\Traits\WorksWithLaravel;
+
 class SeleniumTestCase extends \PHPUnit_Extensions_Selenium2TestCase
 {
+    use GetsConfiguration,
+        WaitForElements,
+        InteractsWithPage,
+        Application,
+        WorksWithLaravel;
 
-    protected $baseUrl = 'http://dieselforward.dev';
+    protected $baseUrl = 'http://localhost';
 
     protected function setUp()
     {
-        $this->setBrowser('chrome');
+
+        $this->loadConfiguration();
+        if(getenv('USE_LARAVEL') == 'true') {
+            $this->setUpLaravel();
+        }
+
+        $this->setBrowser(getenv('BROWSER'));
         $this->setBrowserUrl($this->baseUrl);
-    }
-
-    protected function visit($path)
-    {
-        $this->url($path);
-
-        return $this;
-    }
-
-    protected function see($text, $tag = 'body')
-    {
-
-        //$this->assertEquals($text, $this->byTag($tag)->text());
-        $this->assertContains($text, $this->byTag($tag)->text());
-        return $this;
-    }
-
-    protected function type($value, $name)
-    {
-        $this->byName($name)->value($value);
-
-        return $this;
-    }
-
-    protected function press($text)
-    {
-        $this->byXPath("//button[contains(text(), '{$text}')]")->click();
-        return $this;
     }
 
     protected function wait($seconds = 1)
@@ -46,31 +35,6 @@ class SeleniumTestCase extends \PHPUnit_Extensions_Selenium2TestCase
         sleep($seconds);
 
         return $this;
-    }
-
-    protected function seePageIs($path)
-    {
-
-        $this->assertEquals($this->baseUrl . $path, $this->url());
-
-        return $this;
-    }
-
-
-    /**
-     * @param $class the class you're looking for
-     * @param int $timeout miliseconds to timeout with
-     */
-    public function waitForElementsWithClass($class, $timeout = 2000) {
-
-        $this->waitUntil(function() use($class, $this) {
-
-            try {
-                $this->byClassName($class);
-            }
-
-        }, $timeout);
-
     }
 
 }
