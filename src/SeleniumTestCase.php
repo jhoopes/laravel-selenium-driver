@@ -99,12 +99,13 @@ class SeleniumTestCase extends \PHPUnit_Extensions_Selenium2TestCase
     /**
      * Sleep for a time in seconds
      *
-     * @param int $seconds
+     * @param int|float $seconds Can be less than one for less than a second
      * @return $this
      */
     protected function wait($seconds = 1)
     {
-        sleep($seconds);
+
+        usleep($seconds * 1000000);
 
         return $this;
     }
