@@ -102,12 +102,13 @@ phpunit tests/acceptance/ExampleTest.php
 ## Documentation
  
  - Documentation is currently in the works.
+ - To see what is in the current API look through the traits directory for function names.
  
  
- ## Future features
-  - A more fleshed out API
-  - Additional helpers for JS widgets like selectize, dropzone, etc.
-  - Tests for this package
-  - Better documentation
+## Future features
+ - A more fleshed out API
+ - Additional helpers for JS widgets like selectize, dropzone, etc.
+ - Tests for this package
+ - Better documentation
   
   
