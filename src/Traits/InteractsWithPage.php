@@ -20,6 +20,16 @@ trait InteractsWithPage {
         return $this;
     }
 
+    protected function scroll($amount)
+    {
+
+        $this->execute([
+            'script' => 'window.scrollBy(0, ' . $amount . ')',
+            'args'   => []
+        ]);
+        return $this;
+    }
+
     /**
      * Assert that we see text within the specified tag
      * Defaults to the body tag
@@ -55,7 +65,7 @@ trait InteractsWithPage {
      */
     protected function type($value, $name)
     {
-        $this->byName($name)->value($value);
+        $this->findElement($name)->value($value);
 
         return $this;
     }
