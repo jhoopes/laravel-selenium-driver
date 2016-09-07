@@ -34,14 +34,14 @@ class SeleniumTestCase extends \PHPUnit_Extensions_Selenium2TestCase
     {
 
         $this->loadConfiguration();
-        if(getenv('USE_LARAVEL') == 'true') {
+        if (getenv('USE_LARAVEL') == 'true') {
             $this->setUpLaravel();
 
-            if(getenv('MIGRATE') == 1) {
+            if (getenv('MIGRATE') == 1) {
                 $this->migrate();
             }
 
-            if(getenv('SEED') == 1) {
+            if (getenv('SEED') == 1) {
                 $this->seed();
             }
 
@@ -49,6 +49,17 @@ class SeleniumTestCase extends \PHPUnit_Extensions_Selenium2TestCase
 
         $this->setBrowser(getenv('BROWSER'));
         $this->setBrowserUrl($this->baseUrl);
+    }
+
+    public function setupPage()
+    {
+        if (!empty(getenv('WINDOW_WIDTH')) && !empty(getenv('WINDOW_HEIGHT')) &&
+            is_int(intval(getenv('WINDOW_WIDTH'))) && is_int(intval(getenv('WINDOW_HEIGHT')))) {
+            $this->prepareSession()->currentWindow()->size([
+                'width'  => intval(getenv('WINDOW_WIDTH')),
+                'height' => intval(getenv('WINDOW_HEIGHT'))
+            ]);
+        }
     }
 
 
@@ -76,7 +87,7 @@ class SeleniumTestCase extends \PHPUnit_Extensions_Selenium2TestCase
     /**
      * Register a callback to be run before the application is destroyed.
      *
-     * @param  callable  $callback
+     * @param  callable $callback
      * @return void
      */
     protected function beforeApplicationDestroyed(callable $callback)

@@ -37,6 +37,10 @@ MIGRATE=0
 
 #If you booted laravel, set this to 1 if you'd like your database connection to be auto seeded
 SEED=0
+
+#OPTIONAL:  You can optionally set the window's witdth and height with these values.  Be sure that they are integers
+WINDOW_WIDTH=1250
+WINDOW_HEIGHT=900
 ```
 
  - This configuration file is used in consort with the phpunit.xml file.
