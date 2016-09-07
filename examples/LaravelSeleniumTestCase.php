@@ -4,7 +4,7 @@ namespace Tests\Cases;
 
 use App\User;
 
-class SeleniumTestCase extends \LaravelSeleniumDriver\SeleniumTestCase
+class LaravelSeleniumTestCase extends \LaravelSeleniumDriver\SeleniumTestCase
 {
     /**
      * Helper method to log in, and set the user inside of the application if using laravel
