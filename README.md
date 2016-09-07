@@ -83,7 +83,7 @@ SEED=0
 
 ## Writing tests
 
- - Additional documentation forthcoming, but I wanted to note that it is important to remember that selenium will be running a live session inside of your browser on the application.
+ - Additional documentation is forthcoming, but I wanted to note that it is important to remember that selenium will be running a live session inside of your browser on the application.
     - Because of this, your phpunit session (if using laravel) when running tests will be entirely different than the one running within the browser.
     - Keep this in mind when performing "session" items within your test code and not running it within the web browser
 
